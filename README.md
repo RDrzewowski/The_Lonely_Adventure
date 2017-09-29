@@ -1,2 +1,2 @@
 # The_Lonely_Adventure
-A console rpg made for fun and training.
+A console rpg made in C++ for fun and training.
