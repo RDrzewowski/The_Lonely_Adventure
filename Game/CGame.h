@@ -21,6 +21,7 @@ public:
     void mainLoop();
     void playTheGame();
 
+    void fightAMonster();
     void makeAChoice();
     void playerHasDied();
     void playerHasWon();

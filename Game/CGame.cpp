@@ -9,33 +9,20 @@ CGame::~CGame()
 
 void CGame::mainLoop()
 {
-    createNewMonster();
-
-    while (true)
+    while (!m_opPlayer->isDead() && !m_opPlayer->hasWon(m_iFinishingLevel))
     {
-        makeAChoice();
-
-        if (m_opPlayer->isDead())
-        {
-            playerHasDied();
-            break;
-        }
-        if (m_opMonster->isDead())
-        {
-            monsterBeaten();
-
-            if (m_opPlayer->hasWon(m_iFinishingLevel))
-            {
-                playerHasWon();
-                break;
-            }
-            else
-            {
-                createNewMonster();
-            }
-        }
-        //if none of the above then keep fighting          
+        fightAMonster();
     }
+
+    if (m_opPlayer->isDead())
+    {
+        playerHasDied();
+    }
+    if (m_opPlayer->hasWon(m_iFinishingLevel))
+    {
+        playerHasWon();
+    }
+    //finish the game
 }
 
 void CGame::playTheGame()
@@ -62,6 +49,19 @@ void CGame::playTheGame()
         <<"\n\n\n\n"
         <<"\t\tDO MYCIA - THE GAME\n\n";
     mainLoop();
+}
+
+void CGame::fightAMonster()
+{
+    createNewMonster();
+    while (!m_opPlayer->isDead() && !m_opMonster->isDead())
+    {
+        makeAChoice();
+    }
+    if (m_opMonster->isDead())
+    {
+        monsterBeaten();
+    }
 }
 
 void CGame::makeAChoice()
